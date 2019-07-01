@@ -13,6 +13,12 @@ try:
     images = bsObj.findAll("img",{"src":re.compile("\.\./img/gifts/img.*\.jpg")})
     for image in images:
         print(image.attrs["src"])
+
+    tagLen2 = bsObj.findAll(lambda tag: len(tag.attrs) == 2)
+    for item in tagLen2:
+        if item is not None:
+            print(item)
+
 except AttributeError as e:
     print(e)
 
