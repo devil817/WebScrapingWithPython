@@ -1,17 +1,18 @@
 from urllib.request import urlopen
 from urllib.error import HTTPError
 from bs4 import BeautifulSoup
+import re
 
 try:
     html = urlopen("http://www.pythonscraping.com/pages/page3.html")
 except HTTPError as e:
-    print("error code:"+e.code)
+    print(e)
 
 try:
     bsObj = BeautifulSoup(html, "html.parser")
-    for item in bsObj.find("table", {"id":"giftList"}).tr.next_siblings:
-        print(item)
+    images = bsObj.findAll("img",{"src":re.compile("\.\./img/gifts/img.*\.jpg")})
+    for image in images:
+        print(image.attrs["src"])
 except AttributeError as e:
-    print("attribute error:"+e.__doc__)
-
+    print(e)
 

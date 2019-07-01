@@ -5,13 +5,14 @@ from bs4 import BeautifulSoup
 try:
     html = urlopen("http://www.pythonscraping.com/pages/page3.html")
 except HTTPError as e:
-    print("error code:"+e.code)
+    print("http error : " + e.code)
 
 try:
     bsObj = BeautifulSoup(html, "html.parser")
-    for item in bsObj.find("table", {"id":"giftList"}).tr.next_siblings:
-        print(item)
+    print(bsObj.find("img", {"src":"../img/gifts/img1.jpg"}).parent.previous__siblings.get_text())
 except AttributeError as e:
-    print("attribute error:"+e.__doc__)
+    print("attribute error:"+e.code)
+
+
 
 
